@@ -12,8 +12,16 @@
         <div class="game-board" id="gameBoard"></div>
         <div class="game-info">
             <p>得分: <span id="score">0</span></p>
+            <p>最高分: <span id="highScore">0</span></p>
+            <div class="difficulty">
+                <span>难度:</span>
+                <button id="easyBtn" class="difficulty-btn active">简单</button>
+                <button id="mediumBtn" class="difficulty-btn">中等</button>
+                <button id="hardBtn" class="difficulty-btn">困难</button>
+            </div>
             <button id="startBtn">开始游戏</button>
             <button id="pauseBtn">暂停</button>
+            <div id="debugInfo" style="margin-top: 10px; font-size: 12px; text-align: left;"></div>
         </div>
     </div>
     <script src="script.js"></script>
