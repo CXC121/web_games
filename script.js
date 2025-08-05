@@ -16,6 +16,9 @@ let gameLoopInterval = null;
 let isPaused = false;
 let isGameOver = false;
 
+// 控制是否自动开始游戏
+let autoStart = false; // 设置为false禁用自动开始
+
 // 游戏难度设置
 let difficulty = 'easy'; // 默认简单难度
 const difficultyLevels = {
@@ -265,9 +268,15 @@ function startGame() {
     if (isGameOver) {
         // 游戏结束后重新开始
         initGame();
+        // 启动游戏循环
+        startGameLoop();
     } else {
         // 从暂停状态恢复
         isPaused = false;
+        // 确保游戏循环正在运行
+        if (!gameLoopInterval) {
+            startGameLoop();
+        }
         // 立即更新一次
         update();
     }
@@ -442,8 +451,16 @@ function initGame() {
     // 立即绘制游戏元素
     draw();
     
-    // 启动游戏循环
-    startGameLoop();
+    // 根据autoStart标志决定是否启动游戏循环
+    if (autoStart) {
+        startGameLoop();
+    } else {
+        // 如果不自动开始，显示提示信息
+        const debugInfo = document.getElementById('debugInfo');
+        if (debugInfo) {
+            debugInfo.textContent += '\n游戏已准备就绪，请点击开始按钮开始游戏';
+        }
+    }
 }
 
 // 开始游戏循环
